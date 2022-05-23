@@ -1,0 +1,109 @@
+/* DSEG Font created by keshikan
+https://github.com/keshikan/DSEG
+https://www.keshikan.net/fonts-e.html
+
+Copyright (c) 2017, keshikan (http://www.keshikan.net),
+with Reserved Font Name "DSEG".
+
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL 
+
+See DSEG-LICENSE.txt for full license*/
+
+@font-face {
+    font-family: sevenSegments;
+    src: url(./fonts/DSEG7Classic-Regular.ttf);
+}
+
+@font-face {
+    font-family: sevenSegments;
+    src: url(./fonts/DSEG7Classic-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: sevenSegments;
+    src: url(./fonts/DSEG7Classic-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: sevenSegments;
+    src: url(./fonts/DSEG7Classic-BoldItalic.ttf);
+    font-weight: bold;
+    font-style: italic;
+}
+body{
+    /*background: beige;*/
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    font-size: 25px;
+    font-weight: bold;
+    width: 70px;
+    height: 50px;
+    background: rgb(44, 29, 0);
+    color:antiquewhite;
+    margin: 2px;
+}
+
+.calculatorContainer {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 5px;
+    width: 280px;
+    background-color: antiquewhite;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.display{
+    
+    /*height: 50px;*/
+    text-align: end;
+    /*align-self: stretch;*/
+    padding: 50px 10px;
+    background-color: black;
+    color: rgb(255, 60, 0);
+    font-family: sevenSegments, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.buttonsBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display:flex;
+}
+
+.doubleWide{
+    width: 146px;
+    height: 50px;
+}
+
+.operator {
+    background: rgb(202, 185, 163);
+    color: black;
+}
+
+.redBTN {
+    background-color: orangered;
+    color: antiquewhite;
+}
+
+.silverLining {
+    margin-top: 200px;
+    border: 5px solid silver;
+    border-radius: 10px;
+}
