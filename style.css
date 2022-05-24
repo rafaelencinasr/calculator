@@ -64,16 +64,16 @@ button {
     border-radius: 5px;
 }
 
-.display{
+#display{
     
-    /*height: 50px;*/
+    height: 22px;
     text-align: end;
     /*align-self: stretch;*/
     padding: 50px 10px;
     background-color: black;
     color: rgb(255, 60, 0);
     font-family: sevenSegments, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     font-style: italic;
 }
