@@ -75,10 +75,10 @@ function updateNumber(n){      //updateDisplay();
     }
 
     else{
-        //if(currentNumber.length<maxDigits){
+        if(currentNumber.length<maxDigits){
             currentNumber = currentNumber + n;
             updateDisplay()
-        //}
+        }
     }
 }
 
