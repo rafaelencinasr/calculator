@@ -38,7 +38,7 @@ function storeNumber(){
 const display = document.querySelector('.display');
 
 function updateDisplay(){
-console.log(currentNumber.toString(10).length);
+
 display.textContent= currentNumber;
 }
 
@@ -180,7 +180,7 @@ function getResults(){
     updateDisplay();
 }
 equal.addEventListener('click',()=>{
-    if(currentNumber==='0'||currentNumber===''){
+    if(/*currentNumber==='0'||*/currentNumber===''){
         index=0;
     }
     else{getResults();}
