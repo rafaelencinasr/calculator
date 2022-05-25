@@ -1,54 +1,50 @@
 let operands = [];
-operands[0]= 2;
-operands[1]= 0;
-
 let currentNumber = ''; 
 let decimalFlag = false;
 let maxDigits = 16; //16 digits max
+let index=0;
+let operator ='';
 
-console.table(operands);
 
 // Operations
 function sum(){
-    return operands[0]+operands[1]
+    currentNumber = Number(operands[0])+Number(operands[1]);
 };
-console.log(`Sum: ${sum()}`);
 
 function subtract(){
-    return operands[0]-operands[1]
+    currentNumber = Number(operands[0])-Number(operands[1]);
 };
-console.log(`Subtraction: ${subtract()}`);
 
 function mult(){
-    return operands[0]*operands[1]
+    currentNumber = Number(operands[0])*Number(operands[1]);
 };
-console.log(`Multiplication ${mult()}`);
 
 function divide(){
     if(operands[1]==0){
-        return "Cant do that Dave"
+        currentNumber = "Can't do that, Dave.";
     }
     else{
-    return operands[0]/operands[1]
+        currentNumber = Number(operands[0])/Number(operands[1]);
     }
 };
-console.log(`Division: ${divide()}`);
+
+// Store number to operand array
+
+function storeNumber(){
+    operands[index] = currentNumber;
+}
 
 //  Display update
-const display = document.querySelector('#display');
+const display = document.querySelector('.display');
 
 function updateDisplay(){
+console.log(currentNumber.toString(10).length);
 display.textContent= currentNumber;
-console.log(`string length: ${currentNumber.length}`)
 }
 
 // Number update
-function updateNumber(n){  
-    if(n==='.'){
-        maxDigits=17; 
-        // Decimal point has no length for this typography, so an extra
-        // digit can be used.
-    }
+
+function updateNumber(n){      //updateDisplay();
     // If the first number is a 0, 
     if(currentNumber==='0'&& n != "."){
         currentNumber = n;
@@ -102,21 +98,15 @@ decimal.addEventListener('click',()=>{
 cero.addEventListener('click',()=>{updateNumber('0')});
 
 one.addEventListener('click',()=>{updateNumber('1')});
-
 two.addEventListener('click',()=>{updateNumber('2')});
-
 three.addEventListener('click',()=>{updateNumber('3')});
 
 four.addEventListener('click',()=>{updateNumber('4')});
-
 five.addEventListener('click',()=>{updateNumber('5')});
-
 six.addEventListener('click',()=>{updateNumber('6')});
 
 seven.addEventListener('click',()=>{updateNumber('7')});
-
 eight.addEventListener('click',()=>{updateNumber('8')});
-
 nine.addEventListener('click',()=>{updateNumber('9')});
 
 // Function buttons event listeners
@@ -125,4 +115,98 @@ cDelEv.addEventListener('click',()=>{
     currentNumber = '';
     decimalFlag=false;
     updateNumber('0');
-    });  
+    operands[0]='';
+    operands[1]='';
+    });
+
+    // Steps that happens for every operator button pressed
+function operatorBTNPressed(){
+    storeNumber();
+    index=1;
+    currentNumber = '';
+    decimalFlag=false;
+}    
+
+sumBTN.addEventListener('click',()=>{
+    if(index==1){
+        getResults();
+    }
+    operatorBTNPressed();
+    operator='+';
+});
+
+subBTN.addEventListener('click',()=>{
+    if(index==1){
+        getResults();
+    }
+    operatorBTNPressed();
+    operator='-';
+});
+
+multBTN.addEventListener('click',()=>{
+    if(index==1){
+        getResults();
+    }
+    operatorBTNPressed();
+    operator='*';
+});
+
+divBTN.addEventListener('click',()=>{
+    if(index==1){
+        getResults();
+    }
+    operatorBTNPressed();
+    operator='/';
+});
+
+function getResults(){
+    storeNumber();
+    index=0;
+    switch(operator){
+        case '+':
+            sum();
+            break;
+        case '-':
+            subtract();
+            break;
+        case '*':
+            mult();
+            break;
+        case '/':
+            divide();
+            break;
+    }
+    operator = '';
+    updateDisplay();
+}
+equal.addEventListener('click',()=>{
+    if(currentNumber==='0'||currentNumber===''){
+        index=0;
+    }
+    else{getResults();}
+
+});
+
+backDel.addEventListener('click',()=>{
+    if(currentNumber.length<=1){
+        currentNumber = '0';
+    }
+    else{
+    currentNumber = currentNumber.slice(0,-1);
+    }
+    updateDisplay()
+})
+
+changeSign.addEventListener('click',()=>{
+    currentNumber = currentNumber * -1;
+    updateDisplay()
+});
+
+// Easter egg? sure
+const solarPower = document.querySelector('.solarPower');
+solarPower.addEventListener('mouseenter',()=>{
+    display.classList.add('noPower')
+})
+solarPower.addEventListener('mouseleave',()=>{
+    display.classList.remove('noPower')
+})
