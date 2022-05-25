@@ -1,30 +1,36 @@
 let operands = [];
-let currentNumber = ''; 
+let currentNumber = '0'; 
 let decimalFlag = false;
 let maxDigits = 16; //16 digits max
 let index=0;
 let operator ='';
+let divBy0 = false;
+let precisionDigits=15;
 
+// CHECK THIS WEBSITE https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
 
 // Operations
+// Added toPrecision(6) to prevent float numbers from showing wrong results
+// Divided by 1 to remove trailing zeros
 function sum(){
-    currentNumber = Number(operands[0])+Number(operands[1]);
+    currentNumber = ((Number(operands[0])+Number(operands[1])).toPrecision(precisionDigits)/1).toString(10);
 };
 
 function subtract(){
-    currentNumber = Number(operands[0])-Number(operands[1]);
+    currentNumber = (Number(operands[0])-Number(operands[1])).toPrecision(precisionDigits)/1;
 };
 
 function mult(){
-    currentNumber = Number(operands[0])*Number(operands[1]);
+    currentNumber = (Number(operands[0])*Number(operands[1])).toPrecision(precisionDigits)/1;
 };
 
 function divide(){
     if(operands[1]==0){
         currentNumber = "Can't do that, Dave.";
+        divBy0=true;
     }
     else{
-        currentNumber = Number(operands[0])/Number(operands[1]);
+        currentNumber = (Number(operands[0])/Number(operands[1])).toPrecision(precisionDigits)/1;
     }
 };
 
@@ -38,9 +44,21 @@ function storeNumber(){
 const display = document.querySelector('.display');
 
 function updateDisplay(){
-
-display.textContent= currentNumber;
+    if(divBy0){
+        display.textContent= currentNumber;
+    }
+    else{
+        if(currentNumber<9999999999999999 && currentNumber>-99999999999999){
+            display.textContent= currentNumber;
+        }
+        else{
+            display.textContent= Number(currentNumber).toExponential(6);
+        }
+    }
+    divBy0=false;
 }
+
+updateDisplay();
 
 // Number update
 
@@ -51,11 +69,16 @@ function updateNumber(n){      //updateDisplay();
         updateDisplay()
     }
 
+    else if(currentNumber===''&& n === "."){
+        currentNumber = '0'+n;
+        updateDisplay()
+    }
+
     else{
-        if(currentNumber.length<maxDigits){
+        //if(currentNumber.length<maxDigits){
             currentNumber = currentNumber + n;
             updateDisplay()
-        }
+        //}
     }
 }
 
